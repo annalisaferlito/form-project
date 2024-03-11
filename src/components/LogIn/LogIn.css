@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url(https://i.pinimg.com/736x/22/ac/d4/22acd4edc7efa7d823c70e51d7ef36cb.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    color: white;
+    overflow: scroll;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    margin: 3rem;
+    font-size: 1.1rem;
+    backdrop-filter: blur(30px);
+    border: 1px solid rgb(119, 19, 133);
+    border-radius: 50px;
+    height: 70vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 50px;
+    padding-bottom: 1rem;
+}
+
+input {
+    border: none;
+    border-bottom: 2px solid rgb(119, 19, 133);
+    border-radius: 10px;
+    outline: none;
+    padding: 1rem;
+    width: 20vw;
+    margin-bottom: 1em;
+}
+button {
+    background-color: white;
+    margin: 2.3rem;
+    height: 2rem;
+    width: 8rem;
+    border-radius: 20px;
+    color:rgb(119, 19, 133);
+    border-color: blueviolet;
+}
+p {
+    margin: 0;
+}
+.register {
+    color: blue;
+
+}
