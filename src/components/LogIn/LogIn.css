@@ -17,11 +17,12 @@ body {
 form {
     margin: 3rem;
     font-size: 1.1rem;
+    padding: 3rem;
     backdrop-filter: blur(30px);
     border: 1px solid rgb(119, 19, 133);
     border-radius: 50px;
-    height: 70vh;
-    width: 40vw;
+    height: auto;
+    width: 40rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,6 +34,7 @@ form {
 h1 {
     font-size: 50px;
     padding-bottom: 1rem;
+    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
 }
 
 input {
@@ -41,7 +43,7 @@ input {
     border-radius: 10px;
     outline: none;
     padding: 1rem;
-    width: 20vw;
+    width: 30em;
     margin-bottom: 1em;
 }
 button {
@@ -55,8 +57,18 @@ button {
 }
 p {
     margin: 0;
+    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
 }
 .register {
     color: blue;
-
+}
+@media screen and (max-width: 998px){
+    form {
+        width: 70vw;
+        height: auto;  
+    }
+    input {
+        width: 80%;
+        height: auto;
+    }
 }

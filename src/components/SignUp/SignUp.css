@@ -6,6 +6,7 @@ body {
     background-repeat: no-repeat;
     height: 100vh;
     color: white;
+    overflow: scroll;
 }
 
 .main {
@@ -14,20 +15,26 @@ body {
 }
 
 form {
+    margin: 3rem;
+    font-size: 1.1rem;
+    padding: 3rem;
     backdrop-filter: blur(30px);
-    border: 2px solid rgb(119, 19, 133);
+    border: 1px solid rgb(119, 19, 133);
     border-radius: 50px;
-    height: 60vh;
-    width: 40vw;
+    height: auto;
+    width: 40rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    overflow: hidden;
 }
 
 h1 {
     font-size: 50px;
-    padding-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
 }
 
 input {
@@ -36,13 +43,32 @@ input {
     border-radius: 10px;
     outline: none;
     padding: 1rem;
-    width: 20vw;
+    width: 30em;
     margin-bottom: 1em;
 }
 button {
     background-color: white;
     margin: 2.3rem;
-    height: 3rem;
+    height: 2rem;
     width: 8rem;
-    border-radius: 10px;
+    border-radius: 20px;
+    color:rgb(119, 19, 133);
+    border-color: blueviolet;
+}
+p {
+    margin: 0;
+    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+}
+.register {
+    color: blue;
+}
+@media screen and (max-width: 998px){
+    form {
+        width: 70vw;
+        height: auto;  
+    }
+    input {
+        width: 80%;
+        height: auto;
+    }
 }
