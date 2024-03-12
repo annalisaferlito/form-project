@@ -3,6 +3,7 @@ import "./SignUp.css";
 import { User } from "../../types/User";
 
 const SignUp = () => {
+  const [errors, setErrors] = useState<{[key: string]: string}>({});
   const [user, setUser] = useState<User>({
     id: "",
     username: "",
@@ -12,6 +13,8 @@ const SignUp = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
+    // Rimuovi l'errore corrispondente al campo quando l'utente inizia a modificare il campo
+    setErrors({ ...errors, [name]: "" });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -37,6 +40,14 @@ const SignUp = () => {
     }
   };
 
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    // Se la lunghezza del valore è inferiore a 6, imposta l'errore corrispondente al campo
+    if (value.length < 6) {
+      setErrors({ ...errors, [name]: "Devi inserire almeno 6 caratteri" });
+    }
+  };
+
   return (
     <div className="main">
       <form onSubmit={handleSubmit}>
@@ -47,17 +58,25 @@ const SignUp = () => {
           placeholder="Username"
           value={user.username}
           onChange={handleInputChange}
+          onBlur={handleBlur}
         />
+        {errors.username && <p className="error">{errors.username}</p>}
         <input
           type="password"
           name="password"
           placeholder="Password"
           value={user.password}
           onChange={handleInputChange}
+          onBlur={handleBlur}
         />
-        
+        {errors.password && <p className="error">{errors.password}</p>}
         <button type="submit">Registrati</button>
         <p>Hai già un account?</p>
+        <p>
+          <a href="/register" className="register">
+            Accedi
+          </a>
+        </p>
       </form>
     </div>
   );
