@@ -3,6 +3,7 @@ import "./LogIn.css";
 import { User } from "../../types/User";
 
 const LogIn = () => {
+   // definizione dello stato per le credenziali dell'utente, eventuali errori, stato di caricamento e successo del login
   const [credentials, setCredentials] = useState<User>({
     id: "",
     username: "",
@@ -13,11 +14,13 @@ const LogIn = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
 
+  // funzione per gestire il cambiamento degli input
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
   };
 
+  // Funzione per gestire la sottomissione del form
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -26,7 +29,7 @@ const LogIn = () => {
 
     try {
       const response = await fetch(`http://localhost:3001/users`);
-      if (response.ok) {
+      if (response.ok) {//verifichiamo se l'utente è presente nel db
         const users = await response.json();
         const user = users.find(
           (u: User) =>
@@ -34,16 +37,16 @@ const LogIn = () => {
             u.password === credentials.password
         );
         if (user) {
-          console.log("Login completato con successo!");
+          console.log("Login completato con successo!");//se l'utente è presente il login viene ultimato
           setLoginSuccess(true);
-          // Puoi aggiungere qui eventuali azioni da eseguire dopo il login
+          
         } else {
           setError("Credenziali non valide.");
-          console.error("Credenziali non valide.");
+          console.error("Credenziali non valide.");//se l'utente non è presente nel db o la password è errata
         }
       } else {
         console.error(
-          "Si è verificato un errore durante il recupero degli utenti."
+          "Si è verificato un errore durante il recupero degli utenti." //condizione che compare nel caso in cui non è riuscito a connettersi al db
         );
         setError("Si è verificato un errore durante il recupero degli utenti.");
       }
@@ -51,10 +54,10 @@ const LogIn = () => {
       setError("Si è verificato un errore durante il login.");
       console.error(error);
     } finally {
-      setLoading(false);
+      setLoading(false); 
     }
   };
-
+  //il form e le sue voci
   return (
     <div className="main">
       <form onSubmit={handleSubmit}>

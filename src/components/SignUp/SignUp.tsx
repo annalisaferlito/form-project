@@ -3,6 +3,7 @@ import "./SignUp.css";
 import { User } from "../../types/User";
 
 const SignUp = () => {
+  // stati per gestire gli errori e le informazioni dell'utente
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [user, setUser] = useState<User>({
     id: "",
@@ -10,17 +11,17 @@ const SignUp = () => {
     password: "",
   });
 
+  // funzione per gestire il cambiamento degli input
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
-    // Rimuovi l'errore corrispondente al campo quando l'utente inizia a modificare il campo
     setErrors({ ...errors, [name]: "" });
   };
 
+  // Funzione per gestire la sottomissione del form
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
-    // Verifica se ci sono errori prima di inviare il modulo
+      //verifica della presenza dell'utente nel db
     const hasErrors = Object.values(errors).some(error => error !== "");
     if (hasErrors) {
       console.log("Ci sono errori nel modulo. Impossibile inviare.");
@@ -35,10 +36,9 @@ const SignUp = () => {
         },
         body: JSON.stringify(user),
       });
-  
+      //verifichiamo se è tutto ok durante la registrazione
       if (response.ok) {
         console.log("Registrazione completata con successo!");
-        // Puoi aggiungere qui eventuali azioni da eseguire dopo la registrazione
       } else {
         console.error("Si è verificato un errore durante la registrazione.");
       }
@@ -46,7 +46,7 @@ const SignUp = () => {
       console.error("Si è verificato un errore:", error);
     }
   };
-
+  //ogni volta che togliamo il focus interviene il blur all'interno di un componente, così verifichiamo la lunghezza minima della stringa digitata dall'utente
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     // Se la lunghezza del valore è inferiore a 6, imposta l'errore corrispondente al campo
@@ -54,7 +54,7 @@ const SignUp = () => {
       setErrors({ ...errors, [name]: "Devi inserire almeno 6 caratteri" });
     }
   };
-
+  //il form e le sue voci
   return (
     <div className="main">
       <form onSubmit={handleSubmit}>

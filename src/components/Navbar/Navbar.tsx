@@ -18,7 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({ onPageChange }) => {
           </ul>
         </nav>
     </div>
-  )
+  ) //la navbar e le sue voci
 }
 
 export default Navbar
