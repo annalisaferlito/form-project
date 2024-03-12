@@ -3,7 +3,7 @@ import "./SignUp.css";
 import { User } from "../../types/User";
 
 const SignUp = () => {
-  const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [user, setUser] = useState<User>({
     id: "",
     username: "",
@@ -19,7 +19,14 @@ const SignUp = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+  
+    // Verifica se ci sono errori prima di inviare il modulo
+    const hasErrors = Object.values(errors).some(error => error !== "");
+    if (hasErrors) {
+      console.log("Ci sono errori nel modulo. Impossibile inviare.");
+      return;
+    }
+  
     try {
       const response = await fetch("http://localhost:3001/users", {
         method: "POST",
@@ -28,7 +35,7 @@ const SignUp = () => {
         },
         body: JSON.stringify(user),
       });
-
+  
       if (response.ok) {
         console.log("Registrazione completata con successo!");
         // Puoi aggiungere qui eventuali azioni da eseguire dopo la registrazione
@@ -43,7 +50,7 @@ const SignUp = () => {
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     // Se la lunghezza del valore è inferiore a 6, imposta l'errore corrispondente al campo
-    if (value.length < 6) {
+    if (value.length < 4) {
       setErrors({ ...errors, [name]: "Devi inserire almeno 6 caratteri" });
     }
   };
